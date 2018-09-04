@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "disable_existing_loggers": true,
+  "formatters": {
+    "brief": {
+      "class": "logging.Formatter",
+      "format": "%(asctime)s  %(levelname)-8s [%(name)s] %(message)s"
+    },
+    "normal": {
+      "class": "logging.Formatter",
+      "format": "%(asctime)s  %(levelname)-8s [%(name)s] %(module)s:%(funcName)s:%(lineno)d: %(message)s"
+    },
+    "verbose": {
+      "class": "logging.Formatter",
+      "format": "%(asctime)s  %(levelname)-8s [%(name)s] %(module)s:%(funcName)s:%(lineno)d: [%(process)d]: %(threadName)s: %(message)s"
+    }
+  },
+  "handlers": {
+    "console":{
+      "level": "DEBUG",
+      "class": "logging.StreamHandler",
+      "formatter": "normal",
+      "stream" : "ext://sys.stdout"
+    },
+    "file_handler": {
+      "class": "logging.handlers.RotatingFileHandler",
+      "level": "DEBUG",
+      "formatter": "normal",
+      "filename": "../log/module_test.log",
+      "maxBytes": 10485760,
+      "backupCount": 20,
+      "encoding": "utf8"
+    },
+    "error_file_handler": {
+      "class": "logging.handlers.RotatingFileHandler",
+      "level": "ERROR",
+      "formatter": "verbose",
+      "filename": "../log/module_test_error.log",
+      "maxBytes": 10485760,
+      "backupCount": 20,
+      "encoding": "utf8"
+    }
+  },
+  "loggers": { },
+  "root": {
+    "handlers": ["console", "file_handler", "error_file_handler"],
+    "level": "DEBUG"
+  }
+}
